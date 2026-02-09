@@ -3,26 +3,19 @@
   "version": "0.0.0",
   "description": "Type-safe environment variable validator with Standard Schema support",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "check": "biome check .",
     "format": "biome format --write .",
     "lint": "biome lint .",
@@ -36,7 +29,6 @@
     "@changesets/cli": "^2.29.8",
     "@types/bun": "latest",
     "tsdown": "^0.20.3",
-    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {

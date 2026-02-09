@@ -1,17 +1,17 @@
-export { str } from "./str.js";
-export type { StrOptions } from "./str.js";
+export { str } from "./str.ts";
+export type { StrOptions } from "./str.ts";
 
-export { num } from "./num.js";
-export type { NumOptions } from "./num.js";
+export { num } from "./num.ts";
+export type { NumOptions } from "./num.ts";
 
-export { port } from "./port.js";
-export type { PortOptions } from "./port.js";
+export { port } from "./port.ts";
+export type { PortOptions } from "./port.ts";
 
-export { bool } from "./bool.js";
-export type { BoolOptions } from "./bool.js";
+export { bool } from "./bool.ts";
+export type { BoolOptions } from "./bool.ts";
 
-export { url } from "./url.js";
-export type { UrlOptions } from "./url.js";
+export { url } from "./url.ts";
+export type { UrlOptions } from "./url.ts";
 
-export { oneOf } from "./one-of.js";
-export type { OneOfOptions } from "./one-of.js";
+export { oneOf } from "./one-of.ts";
+export type { OneOfOptions } from "./one-of.ts";

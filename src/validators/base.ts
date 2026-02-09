@@ -1,5 +1,5 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
-import type { BaseValidatorOptions, EnvValidator } from "../types.js";
+import type { BaseValidatorOptions, EnvValidator } from "../types.ts";
 
 /** Create an envokay validator that implements StandardSchemaV1. */
 export function createValidator<T>(

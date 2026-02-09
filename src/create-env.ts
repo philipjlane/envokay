@@ -1,8 +1,8 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
-import { EnvValidationError } from "./errors.js";
-import type { EnvError } from "./errors.js";
-import type { EnvSchema, InferEnv } from "./types.js";
-import { getDefaultEnvSource, isEnvValidator, isStandardSchema } from "./utils.js";
+import { EnvValidationError } from "./errors.ts";
+import type { EnvError } from "./errors.ts";
+import type { EnvSchema, InferEnv } from "./types.ts";
+import { getDefaultEnvSource, isEnvValidator, isStandardSchema } from "./utils.ts";
 
 /**
  * Create a validated, type-safe, frozen env object.

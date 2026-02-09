@@ -1,5 +1,5 @@
-import type { BaseValidatorOptions } from "../types.js";
-import { createValidator } from "./base.js";
+import type { BaseValidatorOptions } from "../types.ts";
+import { createValidator } from "./base.ts";
 
 export interface NumOptions extends BaseValidatorOptions<number> {
 	min?: number;
