@@ -1,0 +1,45 @@
+{
+  "name": "envokay",
+  "version": "0.0.0",
+  "description": "Type-safe environment variable validator with Standard Schema support",
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "check": "biome check .",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "test": "bun test",
+    "changeset": "changeset",
+    "prepublishOnly": "bun run build"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14",
+    "@changesets/cli": "^2.29.8",
+    "@types/bun": "latest",
+    "tsdown": "^0.20.3",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=5.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@standard-schema/spec": "^1.1.0"
+  }
+}
