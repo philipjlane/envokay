@@ -12,7 +12,14 @@ cp .env.example .env
 ## Run
 
 ```bash
+# Bun loads .env automatically
 bun run server.ts
+
+# Node 20.6+
+node --env-file=.env server.ts
+
+# Deno
+deno run --allow-env --allow-net server.ts
 ```
 
 ## Endpoints

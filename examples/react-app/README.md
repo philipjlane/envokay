@@ -12,7 +12,11 @@ cp .env.example .env
 ## Run
 
 ```bash
+# Bun loads .env automatically
 bun run --hot server.ts
+
+# Node 20.6+
+node --env-file=.env server.ts
 ```
 
 Then open http://localhost:3000

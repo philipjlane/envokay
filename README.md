@@ -143,9 +143,139 @@ export const env = createEnv({
 
 Detection checks for the `~standard` property and uses its `validate` method automatically.
 
+## Loading `.env` Files
+
+envokay validates environment variables — it doesn't load `.env` files itself. This keeps the library runtime-agnostic and lets you use whatever loader fits your platform.
+
+### Bun
+
+Bun loads `.env` automatically. No setup needed:
+
+```ts
+// .env is already loaded by the time this runs
+import { createEnv, str, port } from 'envokay'
+
+export const env = createEnv({
+  PORT: port({ default: 3000 }),
+  API_KEY: str({ sensitive: true }),
+})
+```
+
+For a specific file like `.env.production`, use the `--env-file` flag:
+
+```bash
+bun --env-file=.env.production run server.ts
+```
+
+### Node.js
+
+Node 20.6+ supports `--env-file` natively:
+
+```bash
+node --env-file=.env server.js
+node --env-file=.env.production server.js
+```
+
+For older versions or more control, use `dotenv`:
+
+```ts
+import 'dotenv/config' // loads .env
+import { createEnv, str, port } from 'envokay'
+
+export const env = createEnv({
+  PORT: port({ default: 3000 }),
+  API_KEY: str({ sensitive: true }),
+})
+```
+
+To load a specific file:
+
+```ts
+import { config } from 'dotenv'
+config({ path: '.env.production' })
+
+// Or pass a parsed file directly as the source
+import { parse } from 'dotenv'
+import { readFileSync } from 'node:fs'
+
+const env = createEnv(
+  { PORT: port(), API_KEY: str({ sensitive: true }) },
+  parse(readFileSync('.env.production', 'utf8')),
+)
+```
+
+### Deno
+
+Deno provides `@std/dotenv` in the standard library:
+
+```ts
+import '@std/dotenv/load' // loads .env into Deno.env
+import { createEnv, str, port } from 'envokay'
+
+export const env = createEnv({
+  PORT: port({ default: 3000 }),
+  API_KEY: str({ sensitive: true }),
+})
+```
+
+To load a specific file or pass it as a custom source:
+
+```ts
+import { load } from '@std/dotenv'
+
+// Option 1: load into Deno.env, then let createEnv read it
+await load({ envPath: '.env.production', export: true })
+const env = createEnv({ ... })
+
+// Option 2: pass the parsed object directly
+const vars = await load({ envPath: '.env.production' })
+const env = createEnv(
+  { PORT: port(), API_KEY: str({ sensitive: true }) },
+  vars,
+)
+```
+
+### Cloudflare Workers
+
+Cloudflare Workers don't use `.env` files. Environment variables and secrets are configured through the dashboard or `wrangler.toml`:
+
+```toml
+# wrangler.toml
+[vars]
+PORT = "8080"
+LOG_LEVEL = "info"
+```
+
+Secrets are set via the CLI:
+
+```bash
+wrangler secret put API_KEY
+```
+
+Then access them through the `env` parameter in your worker and pass it as the source:
+
+```ts
+import { createEnv, str, port } from 'envokay'
+
+export default {
+  fetch(request: Request, workerEnv: Record<string, string>) {
+    const env = createEnv(
+      {
+        PORT: port({ default: 8080 }),
+        API_KEY: str({ sensitive: true }),
+        LOG_LEVEL: str({ default: 'info' }),
+      },
+      workerEnv,
+    )
+
+    return new Response(`Running on port ${env.PORT}`)
+  },
+}
+```
+
 ## Custom Env Source
 
-By default, `createEnv` reads from `process.env`. You can pass a custom source:
+You can also pass any plain object as the source, useful for testing or custom loaders:
 
 ```ts
 const env = createEnv(
@@ -187,8 +317,9 @@ JSON.stringify(env) // { "API_KEY": "[REDACTED]" }
 
 envokay uses no Node-specific APIs. It works in:
 
-- Node.js
 - Bun
+- Node.js
+- Deno
 - Cloudflare Workers
 - Edge runtimes
 
