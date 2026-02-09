@@ -1,18 +1,18 @@
-# envokay
+# ✅ envokay
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 Type-safe environment variable validation with [Standard Schema](https://github.com/standard-schema/standard-schema) support.
 
-## Why envokay?
+## 🤔 Why envokay?
 
 Existing solutions like `envalid` and `t3-env` work well but lack support for the **Standard Schema** specification. envokay validators implement `StandardSchemaV1`, which means:
 
-- **Use envokay validators anywhere** — TanStack Form, tRPC, Drizzle, and any Standard Schema consumer can use envokay validators directly, with no adapters.
-- **Use any schema library inside `createEnv`** — Bring your own Zod, Valibot, or ArkType schemas and mix them with built-in validators.
-- **Zero lock-in** — Standard Schema is a shared interface across the ecosystem.
+- 🔌 **Use envokay validators anywhere** — TanStack Form, tRPC, Drizzle, and any Standard Schema consumer can use envokay validators directly, with no adapters.
+- 🧩 **Use any schema library inside `createEnv`** — Bring your own Zod, Valibot, or ArkType schemas and mix them with built-in validators.
+- 🔓 **Zero lock-in** — Standard Schema is a shared interface across the ecosystem.
 
-## Installation
+## 📦 Installation
 
 ```bash
 # bun
@@ -25,7 +25,7 @@ npm install envokay
 pnpm add envokay
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ```ts
 import { createEnv, str, port, bool, url, num, oneOf } from 'envokay'
@@ -43,7 +43,7 @@ export const env = createEnv({
 console.log(env.PORT) // 3000
 ```
 
-## API Reference
+## 📖 API Reference
 
 All validators accept an optional options object with:
 
@@ -113,7 +113,7 @@ oneOf(['debug', 'info', 'warn', 'error'] as const, { default: 'info' })
 // Type: 'debug' | 'info' | 'warn' | 'error'
 ```
 
-## Standard Schema
+## 🔗 Standard Schema
 
 ### Using envokay validators in Standard Schema consumers
 
@@ -143,7 +143,7 @@ export const env = createEnv({
 
 Detection checks for the `~standard` property and uses its `validate` method automatically.
 
-## Loading `.env` Files
+## 📂 Loading `.env` Files
 
 envokay validates environment variables — it doesn't load `.env` files itself. This keeps the library runtime-agnostic and lets you use whatever loader fits your platform.
 
@@ -273,7 +273,7 @@ export default {
 }
 ```
 
-## Custom Env Source
+## 🧪 Custom Env Source
 
 You can also pass any plain object as the source, useful for testing or custom loaders:
 
@@ -284,7 +284,7 @@ const env = createEnv(
 )
 ```
 
-## Error Output
+## ❌ Error Output
 
 When validation fails, envokay throws an `EnvValidationError` with a formatted message:
 
@@ -301,7 +301,7 @@ Environment variable validation failed:
 
 All errors are collected before throwing, so you see every problem at once.
 
-### Sensitive Redaction
+### 🔒 Sensitive Redaction
 
 Variables marked `sensitive: true` are redacted in error messages and in `.toJSON()`:
 
@@ -313,16 +313,16 @@ const env = createEnv({
 JSON.stringify(env) // { "API_KEY": "[REDACTED]" }
 ```
 
-## Runtime Support
+## 🌍 Runtime Support
 
 envokay uses no Node-specific APIs. It works in:
 
-- Bun
-- Node.js
-- Deno
-- Cloudflare Workers
-- Edge runtimes
+- 🥟 Bun
+- 💚 Node.js
+- 🦕 Deno
+- ☁️ Cloudflare Workers
+- ⚡ Edge runtimes
 
-## License
+## 📄 License
 
 [MIT](./LICENSE)
