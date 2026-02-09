@@ -16,7 +16,17 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: oven-sh/setup-bun@v2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          registry-url: "https://registry.npmjs.org"
+
+      # Trusted publishers require npm >= 11.5.1
+      - run: npm install -g npm@latest
+
       - run: bun install --frozen-lockfile
 
       - name: Create Release PR or Publish
@@ -29,4 +39,3 @@ jobs:
           commit: "chore: version packages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
