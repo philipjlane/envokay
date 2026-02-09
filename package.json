@@ -21,6 +21,7 @@
     "lint": "biome lint .",
     "test": "bun test",
     "changeset": "changeset",
+    "release": "bun run build && npm publish --provenance",
     "prepublishOnly": "bun run build"
   },
   "license": "MIT",
