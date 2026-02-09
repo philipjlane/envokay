@@ -1,5 +1,5 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
-import type { EnvValidator } from "./types.ts";
+import type { EnvValidator } from "./types.js";
 
 /** Check if a value is an envokay native validator. */
 export function isEnvValidator(value: unknown): value is EnvValidator<unknown> {

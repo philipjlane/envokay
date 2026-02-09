@@ -1,5 +1,5 @@
-import type { BaseValidatorOptions } from "../types.ts";
-import { createValidator } from "./base.ts";
+import type { BaseValidatorOptions } from "../types.js";
+import { createValidator } from "./base.js";
 
 export interface StrOptions extends BaseValidatorOptions<string> {
 	minLength?: number;
